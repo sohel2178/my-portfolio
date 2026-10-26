@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sohel Ahmed — Portfolio
 
-## Getting Started
-
-First, run the development server:
+Single-page portfolio built with Next.js (App Router), TypeScript, and Tailwind CSS v4.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build (lint + type-check)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editing content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `lib/site.ts`: name, role, email, GitHub URL. An empty link is hidden everywhere.
+- `lib/content.ts`: capabilities, architecture stages, projects, skills, principles, and journey.
+  To show **Live** or **Source** buttons on a project, add `url` or `repo` to it.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Structure
 
-## Learn More
+- `app/`: layout and metadata, the page, the generated OG image, the favicon, robots, and sitemap
+- `sections/`: one component per page section
+- `components/`: shared UI (buttons, badges, reveal-on-scroll, the terminal line, system status, icons)
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Push to GitHub and import the repo in Vercel. Once you have a custom domain, set `NEXT_PUBLIC_SITE_URL`
+(e.g. `https://sohelahmed.dev`) so canonical and Open Graph URLs point at it.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The System Status panel in the hero is decorative and labelled "Demo data". It is not connected to any service.

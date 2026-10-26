@@ -1,26 +1,95 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Chart paper by day, night chart after dark. The route colour is the magenta used for courses on navigation charts. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #eef1f3;
+  --surface: #f8fafb;
+  --surface-2: #e3e8ec;
+  --fg: #172033;
+  --muted: #4d5a6e;
+  --subtle: #5c697f;
+  --line: rgb(23 32 51 / 0.12);
+  --line-strong: rgb(23 32 51 / 0.22);
+  --route: #b4126e;
+  --water: #2a63b6;
+  --grid: rgb(42 99 182 / 0.09);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #0f1724;
+  --surface: #162132;
+  --surface-2: #1c2a3f;
+  --fg: #e4eaf2;
+  --muted: #95a3b8;
+  --subtle: #7d8ba1;
+  --line: rgb(228 234 242 / 0.1);
+  --line-strong: rgb(228 234 242 / 0.18);
+  --route: #ff4fae;
+  --water: #6fa3f0;
+  --grid: rgb(111 163 240 / 0.08);
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-route: var(--route);
+  --color-water: var(--water);
+
+  --font-sans: var(--font-archivo);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--route) 22%, transparent);
+  color: var(--fg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--route);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Expanded width is the display treatment: headlines read like chart titles. */
+.display {
+  font-stretch: 118%;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+/* Graticule: the faint lat/long grid printed on charts */
+.graticule {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
